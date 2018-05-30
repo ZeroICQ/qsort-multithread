@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iterator>
+#include <thread>
 
 namespace atl {
     const int   SIZE  = 10;
@@ -37,10 +38,15 @@ namespace atl {
             std::iter_swap(left, right);
         }
 
-        qsort(first, pivot, std::random_access_iterator_tag());
+        void (*qfunc)(RandIt first, RandIt after_last, std::random_access_iterator_tag) = &qsort;
+        std::thread t_left(qfunc, first, pivot, std::random_access_iterator_tag());
+//        qsort(first, pivot, std::random_access_iterator_tag());
         if (pivot < after_last - 1) {
-            qsort(pivot + 1, after_last, std::random_access_iterator_tag());
+            std::thread t_right(qfunc, pivot + 1, after_last, std::random_access_iterator_tag());
+//            qsort(pivot + 1, after_last, std::random_access_iterator_tag());
+            t_right.join();
         }
+        t_left.join();
     }
 
     template <class InIter>
