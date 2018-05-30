@@ -12,3 +12,4 @@ SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${GCC_COMPILE_FLAGS}")
 
 add_subdirectory(src)
 add_subdirectory(tests)
+add_subdirectory(benchmarks)
