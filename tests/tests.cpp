@@ -4,7 +4,7 @@
 TEST_CASE("Hello world")
 {
     std::vector<int> test_vector = {9, 8, 7, 6, 5, 4};
-    atl::qsort(test_vector.begin(), test_vector.end());
+    atl::qsort_nt(test_vector.begin(), test_vector.end());
     REQUIRE(true);
 //    REQUIRE(false);
 }

@@ -2,19 +2,17 @@
 
 #include <iterator>
 #include <thread>
+#include <mutex>
 
 namespace atl {
-    const int   SIZE  = 10;
+    const int   SIZE  = 100;
     const uint  SEED  = 500;
 
+    //returns pivot element
     template <class RandIt>
-    void qsort(RandIt first, RandIt after_last, std::random_access_iterator_tag)
+    RandIt qsort_section(RandIt first, RandIt after_last, std::random_access_iterator_tag)
     {
         auto size = after_last - first;
-
-        if (size < 2) {
-            return;
-        }
 
         auto left = first;
         auto right = after_last - 1;
@@ -37,28 +35,52 @@ namespace atl {
 
             std::iter_swap(left, right);
         }
+        return pivot;
+    }
 
-        void (*qfunc)(RandIt first, RandIt after_last, std::random_access_iterator_tag) = &qsort;
-        std::thread t_left(qfunc, first, pivot, std::random_access_iterator_tag());
-//        qsort(first, pivot, std::random_access_iterator_tag());
-        if (pivot < after_last - 1) {
-            std::thread t_right(qfunc, pivot + 1, after_last, std::random_access_iterator_tag());
-//            qsort(pivot + 1, after_last, std::random_access_iterator_tag());
-            t_right.join();
+    template <class RandIt>
+    void qsort_nt(RandIt first, RandIt after_last, std::random_access_iterator_tag)
+    {
+        auto size = after_last - first;
+
+        if (size < 2) {
+            return;
         }
-        t_left.join();
+
+        auto pivot = qsort_section(first, after_last, std::random_access_iterator_tag());
+
+        qsort_nt(first, pivot, std::random_access_iterator_tag());
+
+        if (pivot < after_last - 1) {
+            qsort_nt(pivot + 1, after_last, std::random_access_iterator_tag());
+        }
     }
 
-    template <class InIter>
-    void qsort(InIter first, InIter last, std::forward_iterator_tag)
-    {
-        //todo: write tests
-    }
+//    template <class InIter>
+//    void qsort_nt(InIter first, InIter last, std::forward_iterator_tag)
+//    {
+//        //todo: write tests
+//    }
 
+    //qsort single threads
     template <class Iter>
-    void qsort(Iter first, Iter last)
+    void qsort_nt(Iter first, Iter last)
     {
-        qsort(first, last, typename std::iterator_traits<Iter>::iterator_category());
+        qsort_nt(first, last, typename std::iterator_traits<Iter>::iterator_category());
+    }
+
+    template <class RandIt>
+    void qsort_t(RandIt first, RandIt after_last, std::random_access_iterator_tag)
+    {
+
+    }
+
+    //qsort multithreads
+    template <class Iter>
+    void qsort_t(Iter first, Iter last, int threads = 4)
+    {
+        
+        qsort_t(first, last, typename std::iterator_traits<Iter>::iterator_category());
     }
 
 } //namespace atl
