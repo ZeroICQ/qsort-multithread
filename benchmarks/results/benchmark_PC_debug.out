@@ -1,0 +1,52 @@
+2018-06-03 22:04:46
+Running ./benchmarks
+Run on (4 X 3800 MHz CPU s)
+CPU Caches:
+  L1 Data 32K (x4)
+  L1 Instruction 32K (x4)
+  L2 Unified 256K (x4)
+  L3 Unified 6144K (x1)
+----------------------------------------------------------------------
+Benchmark                               Time           CPU Iterations
+----------------------------------------------------------------------
+[0;32mBM_sort_std_small              [m[0;33m    179546 ns     178204 ns [m[0;36m      4029[m
+[m[0;32mBM_sort_nothreads_small        [m[0;33m    338271 ns     333852 ns [m[0;36m      2136[m
+[m[0;32mBM_sort_threads_small/2        [m[0;33m    279870 ns      44500 ns [m[0;36m     10000[m
+[m[0;32mBM_sort_threads_small/4        [m[0;33m    475182 ns      51196 ns [m[0;36m     10000[m
+[m[0;32mBM_sort_threads_small/6        [m[0;33m   1119852 ns      51784 ns [m[0;36m     13713[m
+[m[0;32mBM_sort_threads_small/8        [m[0;33m   2150063 ns      54577 ns [m[0;36m     13469[m
+[m[0;32mBM_sort_threads_small/10       [m[0;33m   4987824 ns      57066 ns [m[0;36m      1000[m
+[m[0;32mBM_sort_threads_small/12       [m[0;33m   4917716 ns      55763 ns [m[0;36m      1000[m
+[m[0;32mBM_sort_threads_small/14       [m[0;33m   8105755 ns      58604 ns [m[0;36m      1000[m
+[m[0;32mBM_sort_threads_small/16       [m[0;33m   8039034 ns      57020 ns [m[0;36m      1000[m
+[m[0;32mBM_sort_std_medium             [m[0;33m  13353431 ns   13345268 ns [m[0;36m        52[m
+[m[0;32mBM_sort_nothreads_medium       [m[0;33m  23455704 ns   23446345 ns [m[0;36m        30[m
+[m[0;32mBM_sort_threads_medium/2       [m[0;33m  15517804 ns    1019608 ns [m[0;36m       696[m
+[m[0;32mBM_sort_threads_medium/4       [m[0;33m  11935951 ns    1028174 ns [m[0;36m       679[m
+[m[0;32mBM_sort_threads_medium/6       [m[0;33m  11332644 ns    1019197 ns [m[0;36m       678[m
+[m[0;32mBM_sort_threads_medium/8       [m[0;33m  11752320 ns    1026702 ns [m[0;36m       684[m
+[m[0;32mBM_sort_threads_medium/10      [m[0;33m  13874762 ns    1028938 ns [m[0;36m       683[m
+[m[0;32mBM_sort_threads_medium/12      [m[0;33m  23329873 ns    1032401 ns [m[0;36m       678[m
+[m[0;32mBM_sort_threads_medium/14      [m[0;33m  32403499 ns    1033303 ns [m[0;36m       100[m
+[m[0;32mBM_sort_threads_medium/16      [m[0;33m  61176565 ns    1035645 ns [m[0;36m       100[m
+[m[0;32mBM_sort_std_large              [m[0;33m  14051011 ns   13903584 ns [m[0;36m        51[m
+[m[0;32mBM_sort_nothreads_large        [m[0;33m 608912478 ns  605010160 ns [m[0;36m         1[m
+[m[0;32mBM_sort_threads_large/2        [m[0;33m 384936226 ns   24590522 ns [m[0;36m        10[m
+[m[0;32mBM_sort_threads_large/4        [m[0;33m 300393240 ns   24001862 ns [m[0;36m        10[m
+[m[0;32mBM_sort_threads_large/6        [m[0;33m 308426763 ns   24967966 ns [m[0;36m        10[m
+[m[0;32mBM_sort_threads_large/8        [m[0;33m 210893632 ns   23860273 ns [m[0;36m        29[m
+[m[0;32mBM_sort_threads_large/10       [m[0;33m 212055308 ns   24036197 ns [m[0;36m        29[m
+[m[0;32mBM_sort_threads_large/12       [m[0;33m 215471020 ns   24192505 ns [m[0;36m        29[m
+[m[0;32mBM_sort_threads_large/14       [m[0;33m 235549450 ns   24165755 ns [m[0;36m        29[m
+[m[0;32mBM_sort_threads_large/16       [m[0;33m 263123668 ns   24366016 ns [m[0;36m        10[m
+[m[0;32mBM_sort_std_super_large        [m[0;33m44066670079 ns 44001979079 ns [m[0;36m         1[m
+[m[0;32mBM_sort_nothreads_super_large  [m[0;33m77879870826 ns 77815302391 ns [m[0;36m         1[m
+[m[0;32mBM_sort_threads_super_large/2  [m[0;33m54487564703 ns 2298577883 ns [m[0;36m         1[m
+[m[0;32mBM_sort_threads_super_large/4  [m[0;33m36897068520 ns 2304050384 ns [m[0;36m         1[m
+[m[0;32mBM_sort_threads_super_large/6  [m[0;33m35739505048 ns 2354298796 ns [m[0;36m         1[m
+[m[0;32mBM_sort_threads_super_large/8  [m[0;33m29110040873 ns 2325477846 ns [m[0;36m         1[m
+[m[0;32mBM_sort_threads_super_large/10 [m[0;33m24384810516 ns 2291011659 ns [m[0;36m         1[m
+[m[0;32mBM_sort_threads_super_large/12 [m[0;33m24910533118 ns 2324126054 ns [m[0;36m         1[m
+[m[0;32mBM_sort_threads_super_large/14 [m[0;33m24121783889 ns 2320166069 ns [m[0;36m         1[m
+[m[0;32mBM_sort_threads_super_large/16 [m[0;33m23927420370 ns 2295421232 ns [m[0;36m         1[m
+[m
