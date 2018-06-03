@@ -3,14 +3,17 @@
 #include <iterator>
 #include <thread>
 #include <mutex>
+#include <memory>
+#include <vector>
 
 namespace atl {
-    const int   SIZE  = 100;
+    const int   SIZE  = 40000;
     const uint  SEED  = 500;
+    std::shared_ptr<std::vector<int>> get_default_vector(int size = SIZE);
 
     //returns pivot element
     template <class RandIt>
-    RandIt qsort_section(RandIt first, RandIt after_last, std::random_access_iterator_tag)
+    RandIt qsort_segment(RandIt first, RandIt after_last, std::random_access_iterator_tag)
     {
         auto size = after_last - first;
 
@@ -47,7 +50,7 @@ namespace atl {
             return;
         }
 
-        auto pivot = qsort_section(first, after_last, std::random_access_iterator_tag());
+        auto pivot = qsort_segment(first, after_last, std::random_access_iterator_tag());
 
         qsort_nt(first, pivot, std::random_access_iterator_tag());
 
@@ -56,13 +59,7 @@ namespace atl {
         }
     }
 
-//    template <class InIter>
-//    void qsort_nt(InIter first, InIter last, std::forward_iterator_tag)
-//    {
-//        //todo: write tests
-//    }
 
-    //qsort single threads
     template <class Iter>
     void qsort_nt(Iter first, Iter last)
     {
@@ -72,14 +69,35 @@ namespace atl {
     template <class RandIt>
     void qsort_t(RandIt first, RandIt after_last, std::random_access_iterator_tag)
     {
+        auto pivot = qsort_segment(first, after_last, std::random_access_iterator_tag());
 
+        std::thread* left_thread = nullptr;
+        std::thread* right_thread = nullptr;
+
+        if (pivot - first > 1) {
+            left_thread = new std::thread(qsort_t<RandIt>, first, pivot, std::random_access_iterator_tag());
+        }
+
+        if (after_last - pivot > 2) {
+            right_thread = new std::thread(qsort_t<RandIt>, pivot + 1, after_last, std::random_access_iterator_tag());
+        }
+
+        if (left_thread) {
+            left_thread->join();
+        }
+
+        if (right_thread) {
+            right_thread->join();
+        }
+
+        delete left_thread;
+        delete right_thread;
     }
 
     //qsort multithreads
     template <class Iter>
-    void qsort_t(Iter first, Iter last, int threads = 4)
+    void qsort_t(Iter first, Iter last)
     {
-        
         qsort_t(first, last, typename std::iterator_traits<Iter>::iterator_category());
     }
 
