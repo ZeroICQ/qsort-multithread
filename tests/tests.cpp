@@ -17,7 +17,6 @@ TEST_CASE("Hello world")
         test_sort(*test_vector);
     }
 
-
     SECTION("threads") {
         auto test_vector2 = atl::get_default_vector();
 

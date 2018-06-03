@@ -7,9 +7,14 @@
 #include <vector>
 
 namespace atl {
-    const int   SIZE  = 40000;
+    const int SIZE_SUPER_LARGE  = 1000000000;
+    const int SIZE_LARGE        = 1000000;
+    const int SIZE_MEDIUM       =   50000;
+    const int SIZE_SMALL        =    1000;
+
+
     const uint  SEED  = 500;
-    std::shared_ptr<std::vector<int>> get_default_vector(int size = SIZE);
+    std::shared_ptr<std::vector<int>> get_default_vector(int size);
 
     //returns pivot element
     template <class RandIt>
@@ -67,7 +72,7 @@ namespace atl {
     }
 
     template <class RandIt>
-    void qsort_t(RandIt first, RandIt after_last, std::random_access_iterator_tag)
+    void qsort_t(RandIt first, RandIt after_last, int threads, std::random_access_iterator_tag)
     {
         auto pivot = qsort_segment(first, after_last, std::random_access_iterator_tag());
 
@@ -75,11 +80,23 @@ namespace atl {
         std::thread* right_thread = nullptr;
 
         if (pivot - first > 1) {
-            left_thread = new std::thread(qsort_t<RandIt>, first, pivot, std::random_access_iterator_tag());
+            if (threads > 0) {
+                threads -= 1;
+                left_thread = new std::thread(qsort_t<RandIt>, first, pivot, threads, std::random_access_iterator_tag());
+            } else {
+                qsort_nt(first, pivot, std::random_access_iterator_tag());
+            }
+
         }
 
         if (after_last - pivot > 2) {
-            right_thread = new std::thread(qsort_t<RandIt>, pivot + 1, after_last, std::random_access_iterator_tag());
+            if (threads > 0) {
+                threads -= 1;
+                right_thread = new std::thread(qsort_t<RandIt>, pivot + 1, after_last, threads, std::random_access_iterator_tag());
+            } else {
+                qsort_nt(pivot + 1, after_last, std::random_access_iterator_tag());
+            }
+
         }
 
         if (left_thread) {
@@ -96,9 +113,9 @@ namespace atl {
 
     //qsort multithreads
     template <class Iter>
-    void qsort_t(Iter first, Iter last)
+    void qsort_t(Iter first, Iter last, int threads = 4)
     {
-        qsort_t(first, last, typename std::iterator_traits<Iter>::iterator_category());
+        qsort_t(first, last, threads, typename std::iterator_traits<Iter>::iterator_category());
     }
 
 } //namespace atl

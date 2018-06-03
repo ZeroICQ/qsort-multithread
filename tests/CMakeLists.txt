@@ -12,4 +12,3 @@ target_include_directories(${TESTS_TARGET} PRIVATE ${TEST_INC})
 
 target_compile_options(${TESTS_TARGET} PRIVATE -g3 -O0 -coverage)
 set_target_properties(${TESTS_TARGET} PROPERTIES LINK_FLAGS "${LINK_FLAGS} -coverage")
-
