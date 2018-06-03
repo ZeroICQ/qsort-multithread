@@ -7,7 +7,7 @@
 #include <vector>
 
 namespace atl {
-    const int SIZE_SUPER_LARGE  = 1000000000;
+    const int SIZE_SUPER_LARGE  = 100000000;
     const int SIZE_LARGE        = 1000000;
     const int SIZE_MEDIUM       =   50000;
     const int SIZE_SMALL        =    1000;

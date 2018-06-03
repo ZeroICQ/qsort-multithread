@@ -11,14 +11,14 @@ void test_sort(std::vector<int>& test_vector)
 TEST_CASE("Hello world")
 {
     SECTION("no threads") {
-        auto test_vector = atl::get_default_vector();
+        auto test_vector = atl::get_default_vector(atl::SIZE_MEDIUM);
 
         atl::qsort_nt(test_vector->begin(), test_vector->end());
         test_sort(*test_vector);
     }
 
     SECTION("threads") {
-        auto test_vector2 = atl::get_default_vector();
+        auto test_vector2 = atl::get_default_vector(atl::SIZE_MEDIUM);
 
         atl::qsort_t(test_vector2->begin(), test_vector2->end());
         test_sort(*test_vector2);

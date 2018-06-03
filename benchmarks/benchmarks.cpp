@@ -118,10 +118,6 @@ static void BM_sort_std_super_large(benchmark::State &state) {
 }
 
 // Register the functions as a benchmark
-BENCHMARK(BM_sort_std_super_large);
-BENCHMARK(BM_sort_nothreads_super_large);
-BENCHMARK(BM_sort_threads_super_large)->RangeMultiplier(2)->Range(2, 16);
-
 BENCHMARK(BM_sort_std_small);
 BENCHMARK(BM_sort_nothreads_small);
 BENCHMARK(BM_sort_threads_small)->RangeMultiplier(2)->Range(2, 16);
@@ -133,6 +129,10 @@ BENCHMARK(BM_sort_threads_medium)->RangeMultiplier(2)->Range(2, 16);
 BENCHMARK(BM_sort_std_large);
 BENCHMARK(BM_sort_nothreads_large);
 BENCHMARK(BM_sort_threads_large)->RangeMultiplier(2)->Range(2, 16);
+
+BENCHMARK(BM_sort_std_super_large);
+BENCHMARK(BM_sort_nothreads_super_large);
+BENCHMARK(BM_sort_threads_super_large)->RangeMultiplier(2)->Range(2, 16);
 
 //BENCHMARK_MAIN();
 int main(int argc, char** argv)
